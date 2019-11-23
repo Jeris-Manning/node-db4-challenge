@@ -31,8 +31,27 @@ The requirements for the system, as stated by the client are:
 In addition to the `migrations` and `seeding` scripts, write a data access file that **exports** an object with the following functions:
 
 - `getRecipes()`: should return a list of all recipes in the database.
+
+select * from recipes
+
 - `getShoppingList(recipe_id)`: should return a list of all ingredients and quantities for a given recipe
+
+select ri.quantity, ri.unit, i.ingredient_name
+from recipe_ingredients ri, ingredients i
+where ri.recipe_id = 1
+and ri.id = i.id
+group by i.ingredient_name
+
+
+
 - `getInstructions(recipe_id)`: should return a list of step by step instructions for preparing a recipe
+
+
+select s.step_number, s.instructions
+from steps s, recipes r
+where r.id = 1 
+and s.recipe_id = r.id
+
 
 Organize and name your files anyway you see fit.
 
